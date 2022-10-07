@@ -42,6 +42,7 @@ public class SpringConfig implements WebMvcConfigurer {
         //задаем папку где храняться представления и расширение для файлов
         templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setSuffix(".html");
+        templateResolver.setCharacterEncoding("UTF-8"); // Поддержка русского языка
         return templateResolver;
     }
 
@@ -50,6 +51,7 @@ public class SpringConfig implements WebMvcConfigurer {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         templateEngine.setEnableSpringELCompiler(true);
+
         return templateEngine;
     }
 
@@ -59,6 +61,7 @@ public class SpringConfig implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
+        resolver.setCharacterEncoding("UTF-8"); // Русский язык
         registry.viewResolver(resolver);
     }
 

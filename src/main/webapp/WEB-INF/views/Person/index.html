@@ -5,12 +5,20 @@
     <title>Читатели</title>
 </head>
 <body>
-<h2 th:align="centre">Список читателей:</h2>
+<h2 >Список читателей:</h2>
 <br>
 <div th:each="person:${AllPerson}">
-
-    <p th:text="'Имя читателя: '+${person.getName() +' Дата рождения: '+ person.getDate()}">Info users</p>
+    <a th:href="@{/people/{id}(id=${person.getId()})}"
+       th:text="'Имя читателя: '+${person.getName()} +' Дата рождения: '+ ${person.getDate()}">Info users</a>
 </div>
+<br>
+<form th:method="GET" th:action="@{/people/new}">
+    <input type="submit" value="Add User"/>
+</form>
+<br>
+<form th:method="GET" th:action="@{/books}">
+    <input type="submit" value="Books list"/>
+</form>
 
 </body>
 </html>

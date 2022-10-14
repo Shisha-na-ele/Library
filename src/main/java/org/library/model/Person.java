@@ -2,6 +2,7 @@ package org.library.model;
 
 
 import java.sql.Date;
+import java.util.List;
 
 public class Person {
 
@@ -9,14 +10,17 @@ public class Person {
     private String name;
     private Date date;
 
+    private List<Book> listBook;
+
     public Person (){
 
     }
 
-    public Person(int id,String name, Date date) {
+    public Person(int id,String name, Date date, List<Book> listBook) {
         this.id = id;
         this.name = name;
         this.date = date;
+        this.listBook = listBook;
     }
     public int getId() {
         return id;

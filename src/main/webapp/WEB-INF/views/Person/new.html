@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Add user liberty</title>
+
+<form th:method="POST" th:action="@{/people}" th:object="${person}">
+    <label for="name">Enter your name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+
+    <label for="date">Enter date: </label>
+    <input type="date" th:field="*{date}" id="date"/>
+
+    <input type="submit" value="Add User">
+
+
+</form>
+
+</head>
+<body>
+
+</body>
+</html>

@@ -1,16 +1,33 @@
 package org.library.model;
 
 
+import javax.persistence.*;
 
+
+@Entity
+@Table(name="book")
 public class Book {
+
+    @ManyToOne
+    @JoinColumn(name = "idUser", referencedColumnName = "id")
+    private Person owner;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "id")
     private int id;
+    @Column (name = "name")
     private String name;
+    @Column (name = "author")
     private String author;
+    @Column (name = "year")
     private int year;
 
 
-    public Book(int id, String name, String author, int year) {
-        this.id = id;
+    public Book(){
+
+    }
+
+    public Book(String name, String author, int year) {
         this.name = name;
         this.author = author;
         this.year = year;
@@ -48,8 +65,12 @@ public class Book {
         this.year = year;
     }
 
-    public Book(){
+    public Person getOwner() {
+        return owner;
+    }
 
+    public void setOwner(Person owner) {
+        this.owner = owner;
     }
 
 }

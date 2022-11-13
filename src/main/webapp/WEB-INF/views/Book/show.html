@@ -11,14 +11,14 @@
 + ' Год выпуска: ' + ${book.getYear()}"> some book</p>
 <br>
 <hr>
-<div th:if="${reader.name}">
+<div th:if="${book.getOwner()}">
     <p>Сейчас читает:</p>
-    <p th:text="${reader.name}"> name people </p>
+    <p th:text="${book.getOwner().getName()}"> name people </p>
     <form th:method="GET" th:action="@{{id}/deleteReader (id = ${book.getId()})}">
         <input type="submit" value="Освободить книгу!">
     </form>
 </div>
-<div th:unless="${reader.name}">
+<div  th:unless="${book.getOwner()}">
     <p>Сейчас книга свободна!</p>
     <form th:method="POST" th:action="@{{id}/addReader (id = ${book.getId()})}" th:object="${person}">
         <select th:object="${person}" th:field="*{id}" id="person">

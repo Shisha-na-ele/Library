@@ -1,57 +1,45 @@
 package org.library.dao;
 
-import org.library.model.Book;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.library.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class PersonDao {
-    private final JdbcTemplate jdbcTemplate;
-
+    private SessionFactory sessionFactory;
     @Autowired
-    public PersonDao(JdbcTemplate jdbcTemplate){
-        this.jdbcTemplate = jdbcTemplate;
+    public void setSessionFactory (SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
-
+    @Transactional()
     public List<Person> index(){
-        return jdbcTemplate.query("SELECT * FROM Person", new BeanPropertyRowMapper<>(Person.class));
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Person ").getResultList();
     }
-
+    @Transactional
     public void addUser(Person person){
-        jdbcTemplate.update("INSERT INTO Person VALUE (id,?,?)", person.getName(), person.getDate());
+        Session session = sessionFactory.getCurrentSession();
+        session.save(person);
     }
 
+    @Transactional()
     public Person show(int id){
-       return jdbcTemplate.queryForObject("SELECT * FROM Person WHERE id=?",
-               new BeanPropertyRowMapper<>(Person.class), id);
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Person.class,id);
     }
-
-    public void updateUser(Person person, int id){
-        jdbcTemplate.update("UPDATE Person SET name=?, date=? where id=?", person.getName(), person.getDate(), id);
+    @Transactional
+    public void updateUser(Person person){
+        Session session = sessionFactory.getCurrentSession();
+        session.update(person);
     }
-
-    public void delete(int id){
-        jdbcTemplate.update("DELETE FROM Person WHERE id=?", id);
+    @Transactional
+    public void delete(Person person){
+        Session session =sessionFactory.getCurrentSession();
+        session.delete(person);
     }
-
-    public List<Book> addListBook(int id){
-        List<Book> bookList =
-        jdbcTemplate.query("SELECT person.id, person.name, book.name, book.author, " +
-                "book.year FROM person JOIN book  on person.id = book.idUser WHERE person.id = ?",
-                new BeanPropertyRowMapper<>(Book.class), id);
-        if (bookList.size()>0){
-            return bookList;
-        } else {
-            return null;
-        }
-
-    }
-
 
 }

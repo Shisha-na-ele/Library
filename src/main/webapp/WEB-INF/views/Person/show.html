@@ -9,9 +9,9 @@
 
 <p th:text="'Имя читателя: '+${person.getName()} +' Дата рождения: '+ ${person.getDate()}">Info users</p>
 <hr>
-<p th:if="${#lists.isEmpty(AllBook)}">Человек не взял книг!</p>
+<p th:if="${#lists.isEmpty(person.getBookList())}">Человек не взял книг!</p>
 
-<div th:each="book:${AllBook}" th:if="${not #lists.isEmpty(AllBook)}">Человек читает:
+<div th:each="book:${person.getBookList()}" th:if="${not #lists.isEmpty(person.getBookList())}">Человек читает:
 
     <p th:text="'Название книги: ' + ${book.getName()} + ' Автор: ' + ${book.getAuthor()}
 + ' Год выпуска: ' + ${book.getYear()}"> some book</p>

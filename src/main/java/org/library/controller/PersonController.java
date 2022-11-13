@@ -28,7 +28,7 @@ public class PersonController {
     }
 
     @PostMapping()
-    public String saveAddUser(@ModelAttribute Person person){
+    public String saveAddUser(@ModelAttribute("person") Person person){
         personDao.addUser(person);
         return "redirect:/people";
     }
@@ -36,7 +36,6 @@ public class PersonController {
     @GetMapping("/{id}")
     public String show (Model model, @PathVariable("id") int id){
         model.addAttribute("person", personDao.show(id));
-        model.addAttribute("AllBook", personDao.addListBook(id));
         return "Person/show";
     }
 
@@ -47,14 +46,14 @@ public class PersonController {
     }
 
     @PostMapping("{id}")
-    public String updateUser (@PathVariable("id") int id, @ModelAttribute Person person){
-        personDao.updateUser(person, id);
+    public String updateUser (@ModelAttribute("person")Person person){
+        personDao.updateUser(person);
         return "redirect:/people/{id}";
     }
 
     @GetMapping("/{id}/delete")
-    public String delete (@PathVariable("id") int id){
-        personDao.delete(id);
+    public String delete (@ModelAttribute("person") Person person){
+        personDao.delete(person);
         return "redirect:/people";
     }
 

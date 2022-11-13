@@ -1,60 +1,60 @@
 package org.library.dao;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.library.model.Book;
 import org.library.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
 public class BookDao {
-    private final JdbcTemplate jdbcTemplate;
-
+    private SessionFactory sessionFactory;
     @Autowired
-    public BookDao(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public BookDao (SessionFactory sessionFactory){
+        this.sessionFactory = sessionFactory;
     }
-
-
+    @Transactional
     public List<Book> index(){
-        return jdbcTemplate.query("SELECT * FROM book", new BeanPropertyRowMapper<>(Book.class));
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("from Book").getResultList();
     }
-
+    @Transactional
     public void addBook(Book book){
-        jdbcTemplate.update("INSERT INTO Book VALUE (id,?,?,?,idUser)", book.getName(), book.getAuthor(), book.getYear());
+        Session session = sessionFactory.getCurrentSession();
+        session.save(book);
     }
 
+    @Transactional
     public Book show(int id){
-       return jdbcTemplate.queryForObject("SELECT * FROM book WHERE id=?", new BeanPropertyRowMapper<>(Book.class), id);
+       Session session = sessionFactory.getCurrentSession();
+       return session.get(Book.class, id);
     }
 
-    public void edit(int id, Book book){
-        jdbcTemplate.update("UPDATE book SET name=?, author=?, year=? WHERE id=?", book.getName(),
-                book.getAuthor(),book.getYear(), id);
+    @Transactional
+    public void edit(Book book){
+        Session session = sessionFactory.getCurrentSession();
+        session.update(book);
     }
 
-    public void delete(int id){
-        jdbcTemplate.update("DELETE FROM book WHERE id=?", id);
+    @Transactional
+    public void delete(Book book){
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(book);
     }
 
-    public Person getReader(int id){
-        return jdbcTemplate.queryForObject("SELECT book.id, book.name, p.name FROM Book left join person p on p.id = book.idUser" +
-                        " WHERE book.id=?", new BeanPropertyRowMapper<>(Person.class), id);
-
-    }
-
+    @Transactional
     public void deleteReader(int id){
-        jdbcTemplate.update("UPDATE book SET idUser=null WHERE book.id = ? ", id);
+        Book book = show(id);
+        book.setOwner(null);
     }
 
-    public void addReader(int bookId, int personId){
-        jdbcTemplate.update("UPDATE book set idUser = ? where id =?", personId, bookId);
+    @Transactional
+    public void addReader(int bookId, Person person){
+        Book book = show(bookId);
+        book.setOwner(person);
     }
-
-
 
 }

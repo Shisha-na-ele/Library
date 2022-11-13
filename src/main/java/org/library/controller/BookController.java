@@ -1,5 +1,6 @@
 package org.library.controller;
 
+
 import org.library.dao.BookDao;
 import org.library.dao.PersonDao;
 import org.library.model.Book;
@@ -7,7 +8,10 @@ import org.library.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
+
+
 
 @Controller
 @RequestMapping("/books")
@@ -15,10 +19,12 @@ public class BookController {
         private final BookDao bookDao;
         private final PersonDao personDao;
 
+
     @Autowired
     public BookController(BookDao bookDao, PersonDao personDao) {
         this.bookDao = bookDao;
         this.personDao = personDao;
+
     }
 
     @GetMapping()
@@ -34,7 +40,7 @@ public class BookController {
     }
 
     @PostMapping()
-    public String save (@ModelAttribute Book book){
+    public String save (@ModelAttribute("book") Book book){
         bookDao.addBook(book);
         return "redirect:/books";
     }
@@ -42,7 +48,6 @@ public class BookController {
     @GetMapping("/{id}")
     public String show (Model model, @PathVariable("id") int id){
         model.addAttribute("book", bookDao.show(id));
-        model.addAttribute("reader", bookDao.getReader(id));
         model.addAttribute("AllReader", personDao.index());
         model.addAttribute("person", new Person());
         return "/Book/show";
@@ -55,14 +60,14 @@ public class BookController {
     }
 
     @PostMapping("/{id}/edit")
-    public String saveBook(@ModelAttribute Book book, @PathVariable("id") int id){
-        bookDao.edit(id, book);
+    public String saveBook(@ModelAttribute("book") Book book) {
+        bookDao.edit(book);
         return "redirect:/books/{id}";
     }
 
     @GetMapping("/{id}/delete")
-    public String delete(@PathVariable("id") int id){
-        bookDao.delete(id);
+    public String delete(@ModelAttribute("book") Book book){
+        bookDao.delete(book);
         return "redirect:/books";
     }
 
@@ -74,7 +79,7 @@ public class BookController {
 
     @PostMapping("/{id}/addReader")
     public String addReader(@PathVariable("id") int id, @ModelAttribute Person person){
-        bookDao.addReader(id, person.getId());
+        bookDao.addReader(id, person);
         return "redirect:/books/{id}";
     }
 }

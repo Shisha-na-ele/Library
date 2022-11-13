@@ -17,7 +17,6 @@
     <maven.compiler.source>18</maven.compiler.source>
     <maven.compiler.target>18</maven.compiler.target>
 
-
   </properties>
 
 
@@ -43,6 +42,7 @@
       <artifactId>spring-context</artifactId>
       <version>${spring.version}</version>
     </dependency>
+
 
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
     <dependency>
@@ -74,12 +74,14 @@
       <scope>provided</scope>
     </dependency>
 
+
     <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.30</version>
+      <version>8.0.31</version>
     </dependency>
+
 
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
     <dependency>
@@ -88,10 +90,30 @@
       <version>${spring.version}</version>
     </dependency>
 
+    <!-- зависимости Hibernate -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.4.20.Final</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-dbcp</artifactId>
+      <version>10.1.0</version>
+    </dependency>
+
 
 
   </dependencies>
   <build>
+
     <finalName>Library</finalName>
   </build>
 </project>

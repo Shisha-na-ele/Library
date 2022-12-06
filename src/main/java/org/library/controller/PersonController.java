@@ -1,7 +1,7 @@
 package org.library.controller;
 
-import org.library.dao.PersonDao;
 import org.library.model.Person;
+import org.library.service.PersonService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/people")
 public class PersonController {
-    private final PersonDao personDao;
+    private final PersonService personService;
 
-    public PersonController(PersonDao personDao) {
-        this.personDao = personDao;
+    public PersonController(PersonService personService) {
+        this.personService = personService;
     }
 
     @GetMapping()
     public String index(Model model){
-        model.addAttribute("AllPerson", personDao.index());
+        model.addAttribute("AllPerson", personService.findAll());
         return "Person/index";
     }
 
@@ -29,31 +29,31 @@ public class PersonController {
 
     @PostMapping()
     public String saveAddUser(@ModelAttribute("person") Person person){
-        personDao.addUser(person);
+        personService.save(person);
         return "redirect:/people";
     }
 
     @GetMapping("/{id}")
     public String show (Model model, @PathVariable("id") int id){
-        model.addAttribute("person", personDao.show(id));
+        model.addAttribute("person", personService.findOne(id));
         return "Person/show";
     }
 
     @GetMapping("/{id}/edit")
     public String update(Model model, @PathVariable("id") int id){
-        model.addAttribute("person", personDao.show(id));
+        model.addAttribute("person", personService.findOne(id));
         return "Person/edit";
     }
 
     @PostMapping("{id}")
     public String updateUser (@ModelAttribute("person")Person person){
-        personDao.updateUser(person);
+        personService.update(person);
         return "redirect:/people/{id}";
     }
 
     @GetMapping("/{id}/delete")
     public String delete (@ModelAttribute("person") Person person){
-        personDao.delete(person);
+        personService.delete(person.getId());
         return "redirect:/people";
     }
 

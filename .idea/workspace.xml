@@ -9,27 +9,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6838580d-7947-4251-ab18-9b298636b1e9" name="Changes" comment="финиш">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/library/config/HbConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/hb.properties" afterDir="false" />
+    <list default="true" id="6838580d-7947-4251-ab18-9b298636b1e9" name="Changes" comment="add support Hibernate">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/library/repo/BookRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/library/repo/PersonRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/library/service/BookService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/library/service/PersonService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/config/LibertyMvcDispatcherServletInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/config/LibertyMvcDispatcherServletInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/config/HbConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/config/HbConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/library/config/SpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/config/SpringConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/library/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/controller/BookController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/library/controller/PersonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/controller/PersonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/dao/BookDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/dao/BookDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/dao/PersonDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/dao/PersonDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/model/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/model/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/library/model/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/library/model/Person.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/database.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/database.properties.origin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Book/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Book/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Book/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Book/new.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Book/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Book/show.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Person/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Person/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Person/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Person/new.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Person/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/Person/show.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +30,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -66,7 +57,7 @@
       <map>
         <entry key="com.haulmont.jpb.jpaInspector" value="false" />
         <entry key="com.haulmont.jpb.jpaPalette" value="false" />
-        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
       </map>
     </option>
   </component>
@@ -103,6 +94,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Facets&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;4d70254b3a8e2bc38b6147fa6ee813be&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -115,6 +107,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.library.repo" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\java\library\Library\src\main\webapp\WEB-INF\views" />
     </key>
@@ -255,7 +250,11 @@
       <workItem from="1668179525370" duration="3162000" />
       <workItem from="1668248156044" duration="10623000" />
       <workItem from="1668264722544" duration="1623000" />
-      <workItem from="1668327177649" duration="3439000" />
+      <workItem from="1668327177649" duration="4125000" />
+      <workItem from="1668522638953" duration="89000" />
+      <workItem from="1669906380562" duration="5401000" />
+      <workItem from="1670009933450" duration="582000" />
+      <workItem from="1670343877818" duration="4855000" />
     </task>
     <task id="LOCAL-00001" summary="Start">
       <created>1665085720730</created>
@@ -292,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665751171682</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add support Hibernate">
+      <created>1668330694786</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1668330694786</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,6 +322,7 @@
     <MESSAGE value="Финиш!" />
     <MESSAGE value="Добавлено поддержка руского языка, Dao, Controller GetMethod, index.html" />
     <MESSAGE value="финиш" />
-    <option name="LAST_COMMIT_MESSAGE" value="финиш" />
+    <MESSAGE value="add support Hibernate" />
+    <option name="LAST_COMMIT_MESSAGE" value="add support Hibernate" />
   </component>
 </project>

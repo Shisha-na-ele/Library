@@ -17,6 +17,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @ComponentScan("org.library") // find Spring component for directory
 @EnableWebMvc // позволяет поддерживать @Controller and @RequestMapping
 // имплементим интерфейс позваляющий заменить стандартный шаблонизатор на Thymeleaf Spring5
+
 public class SpringConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
     private final Environment environment; // дает доступ к файлу с свойствами "classpath:database.properties"
